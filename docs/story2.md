@@ -1,42 +1,61 @@
 [Back to Exercise](./exercise.md) | [Previous: Story 1](./story1.md)
 
-# Story 2: Shopping Cart
+# Story 2: Movie Management
 
 ## What We're Building
 
-A simple shopping cart where customers can add products and see their total.
+Movie management functionality where users can rate movies, add them to watchlists, and track what they've watched.
 
 ## User Stories
 
 ```
-As a customer
-When I see a product I want to buy  
-Then I should be able to add it to my cart
+As a user
+When I see a movie I'm interested in  
+Then I should be able to add it to my watchlist
 
-As a customer
-When I have items in my cart
-Then I should be able to see what I've selected and the total cost
+As a user
+When I watch a movie
+Then I should be able to mark it as watched and give it a rating
+
+As a user
+When I want to organize my movies
+Then I should be able to filter by watched/unwatched status
 ```
 
 ## Requirements
 
 ### Frontend Focus
 
-**Add to Cart:**
-- Add "Add to Cart" buttons to your product list
-- Store cart items in React state (useState)
-- Simple cart UI showing selected items
+**Watchlist Features:**
+- "Add to Watchlist" button on each movie
+- Simple watchlist display showing saved movies
+- Remove from watchlist functionality
 
-**Cart Display:**
-- Show cart items with name and price
-- Calculate and display total price
-- Basic remove item functionality
+**Rating & Status:**
+- Mark movies as watched/unwatched
+- Star rating system (1-5 stars)
+- Filter movies by watched status
+
+**Movie Organization:**
+- Filter by status (all, watchlist, watched)
+- Sort by rating, year, or title
+- User's personal movie collection view
 
 **Simple Implementation:**
 ```javascript
-// Example cart state
-const [cart, setCart] = useState([
-  { sku: "30124565", name: "Silver Towel", price: 15.99, quantity: 1 }
+// Example movie state with user data
+const [movies, setMovies] = useState([
+  { 
+    id: "movie-001", 
+    title: "Inception", 
+    director: "Christopher Nolan",
+    year: 2010,
+    genre: "Sci-Fi",
+    rating: 8.8,
+    userRating: null,
+    inWatchlist: false,
+    watched: false
+  }
 ])
 ```
 
@@ -44,28 +63,74 @@ const [cart, setCart] = useState([
 
 If you want to practice API design:
 
-**Cart Endpoints:**
-- `POST /api/cart/add` - Add item to cart
-- `GET /api/cart` - Get current cart
-- `DELETE /api/cart/:sku` - Remove item
+**Movie User Data Endpoints:**
+- `POST /api/movies/:id/watchlist` - Add/remove from watchlist
+- `POST /api/movies/:id/rating` - Rate a movie
+- `PATCH /api/movies/:id/watched` - Mark as watched/unwatched
+- `GET /api/movies/watchlist` - Get user's watchlist
 
 ## Implementation Ideas
 
 **Frontend Only Approach:**
-- Use React state to manage cart
-- Store cart in localStorage to persist across page refreshes
-- Focus on the user experience
+- Use React state to manage user's movie preferences
+- Store watchlist and ratings in localStorage
+- Focus on the user experience and movie interaction
 
 **Full Stack Approach:**
-- Create cart API endpoints
+- Create movie preference API endpoints
 - Connect frontend to backend
-- Handle cart operations with proper error handling
+- Handle user data with proper error handling
+
+## Example Watchlist Component
+
+```javascript
+function MovieCard({ movie, onAddToWatchlist, onRateMovie }) {
+  const [userRating, setUserRating] = useState(movie.userRating || 0)
+  
+  const handleRating = (rating) => {
+    setUserRating(rating)
+    onRateMovie(movie.id, rating)
+  }
+  
+  return (
+    <div className="movie-card">
+      <h3>{movie.title}</h3>
+      <p>{movie.director} • {movie.year}</p>
+      <p>Genre: {movie.genre}</p>
+      <p>Rating: ⭐ {movie.rating}/10</p>
+      
+      <div className="user-actions">
+        <button 
+          onClick={() => onAddToWatchlist(movie.id)}
+          className={movie.inWatchlist ? 'in-watchlist' : ''}
+        >
+          {movie.inWatchlist ? '✓ In Watchlist' : '+ Add to Watchlist'}
+        </button>
+        
+        <div className="rating">
+          Your Rating: 
+          {[1,2,3,4,5].map(star => (
+            <span 
+              key={star}
+              onClick={() => handleRating(star)}
+              className={star <= userRating ? 'filled' : 'empty'}
+            >
+              ⭐
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+```
 
 ## Tips
 
-- Start simple - cart in React state is perfectly fine
+- Start simple - movie preferences in React state is perfectly fine
 - localStorage persistence is a nice touch if you have time
-- Think about user experience - where should the cart be visible?
-- Don't worry about complex cart logic (quantities, validation, etc.)
+- Think about user experience - how do users discover and track movies?
+- Don't worry about complex validation or edge cases
+- Focus on the core workflow: browse → add to watchlist → watch → rate
 
-Ready for authentication? Try [Story 3: User Authentication](./story3.md)
+Ready for user accounts? Try [Story 3: User Accounts](./story3.md)

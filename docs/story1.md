@@ -1,45 +1,48 @@
 [Back to Exercise](./exercise.md)
 
-# Story 1: Product Catalog
+# Story 1: Movie Catalog
 
 ## What We're Building
 
-A simple product catalog where customers can view and search through available products.
+A simple movie catalog where users can browse and search through available movies.
 
 ## User Stories
 
 ```
-As a customer  
-When I visit the Mindera Store homepage
-Then I should see a list of available products
+As a user  
+When I visit the Mindera Cinema homepage
+Then I should see a list of movies
 
-As a customer
-When I want to find specific products  
-Then I should be able to search by product name
+As a user
+When I want to find specific movies  
+Then I should be able to search by title or filter by genre
 ```
 
 ## Requirements
 
 ### Backend (API)
 
-**Product API Endpoint:**
-Create a simple endpoint to serve product data:
+**Movie API Endpoint:**
+Create a simple endpoint to serve movie data:
 
-- `GET /api/products` - Return all products from the JSON file
-- `GET /api/products?search=towel` - Filter products by name (optional)
+- `GET /api/movies` - Return all movies from the JSON file
+- `GET /api/movies?search=inception` - Filter movies by title (optional)
+- `GET /api/movies?genre=action` - Filter by genre (optional)
 
 **Response format:**
 ```json
 {
-  "products": [
+  "movies": [
     {
-      "sku": "30124565",
-      "name": "Silver Egyptian Cotton Towel",
-      "description": "Our Soft & Absorbent Towel...",
-      "category": "Towels",
-      "color": "Silver",
-      "price": 15.99,
-      "inStock": true
+      "id": "movie-001",
+      "title": "Inception",
+      "director": "Christopher Nolan",
+      "year": 2010,
+      "genre": "Sci-Fi",
+      "rating": 8.8,
+      "duration": 148,
+      "description": "A thief who steals corporate secrets through dream-sharing technology...",
+      "poster": "/images/inception.jpg"
     }
   ]
 }
@@ -47,22 +50,22 @@ Create a simple endpoint to serve product data:
 
 ### Frontend
 
-**Product Display:**
-- Show products in a simple list or grid
-- Display: name, price, category, and stock status
+**Movie Display:**
+- Show movies in a simple grid or list layout
+- Display: title, director, year, genre, and rating
 - Basic styling (doesn't need to be fancy)
 
-**Search (Optional):**
-- Add a search input box
-- Filter products by name as you type
-- Show "No products found" when search has no results
+**Search & Filter (Optional):**
+- Add a search input box to filter by movie title
+- Filter dropdown for genre (all, action, comedy, drama, etc.)
+- Show "No movies found" when filters have no results
 
 ## Implementation Tips
 
 **For Backend:**
-- Use the existing `products.json` file as your data source
-- Start with a simple endpoint that returns all products
-- Add search functionality if you have time
+- Use the existing `movies.json` file as your data source
+- Start with a simple endpoint that returns all movies
+- Add search/filtering functionality if you have time
 
 **For Frontend:**
 - Replace the current "Hello World" component
@@ -79,27 +82,27 @@ Create a simple endpoint to serve product data:
 
 **Simple API (Express):**
 ```javascript
-app.get('/api/products', (req, res) => {
-  // Read products.json
-  // Filter by search if provided
-  // Return products
+app.get('/api/movies', (req, res) => {
+  // Read movies.json
+  // Filter by search or genre if provided
+  // Return movies
 })
 ```
 
 **Simple Frontend (React):**
 ```javascript
-function ProductList() {
-  const [products, setProducts] = useState([])
+function MovieList() {
+  const [movies, setMovies] = useState([])
   
   useEffect(() => {
-    // Fetch from /api/products
+    // Fetch from /api/movies
     // Update state
   }, [])
   
   return (
-    // Map over products and display them
+    // Map over movies and display them
   )
 }
 ```
 
-Ready for more? Check out [Story 2: Shopping Cart](./story2.md)
+Ready for more? Check out [Story 2: Movie Management](./story2.md)

@@ -1,10 +1,10 @@
 [Back to README](../README.md)
 
-## Fullstack E-Commerce Platform Exercise
+## Fullstack Movie Database Exercise
 
 ### Overview
 
-This is a hands-on coding session where you'll work on building features for **Mindera Store** - a simple e-commerce platform. You'll be enhancing an existing codebase by adding e-commerce functionality. The goal is to demonstrate your approach to fullstack development through practical implementation.
+This is a hands-on coding session where you'll work on building features for **Mindera Cinema** - a simple movie discovery platform. You'll be enhancing an existing codebase by adding movie database functionality. The goal is to demonstrate your approach to fullstack development through practical implementation.
 
 ### Before You Begin
 
@@ -23,30 +23,30 @@ This is a hands-on coding session where you'll work on building features for **M
 
 ### Business Context
 
-**Mindera Store** sells home and lifestyle products. The platform needs basic e-commerce functionality for customers to browse and purchase products.
+**Mindera Cinema** is a movie discovery app that helps users find and track movies they want to watch. The platform needs basic movie database functionality for users to browse, search, and manage their movie preferences.
 
 ### Stories
 
 Choose which stories to work on based on your interests and strengths. There's no requirement to complete all of them.
 
-**Story 1: Product Catalog** *(Recommended starting point)*
-- Build an API to serve product data
-- Create a frontend to display products
+**Story 1: Movie Catalog** *(Starting point)*
+- Build an API to serve movie data
+- Create a frontend to display movies
 - Add basic search and filtering
 
-**Story 2: Shopping Cart** *(If time allows)*
-- Add cart functionality to store selected items
-- Calculate totals including tax
-- Persist cart state
+**Story 2: Movie Management** *(If time allows)*
+- Add functionality to rate movies and add to watchlist
+- Mark movies as watched/unwatched
+- Organize movies by genres or ratings
 
-**Story 3: User Authentication** *(Advanced)*
+**Story 3: User Accounts** *(Advanced)*
 - Implement user registration and login
-- Protect certain routes
-- Associate carts with users
+- Personal watchlists for each user
+- Simple state management for auth
 
 ### Getting Started
 
-1. Review the existing product data in `packages/api/products.json` 
+1. Review the existing movie data in `packages/api/movies.json` 
 2. Start with [Story 1](./story1.md) to build the foundation
 3. Progress through stories as time allows
 4. Focus on demonstrating your development approach
